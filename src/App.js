@@ -3,32 +3,55 @@ import "./App.css";
 import Template from "./components/Template";
 
 class App extends Component {
-  state = { dataList: null, categorie: "cats", cnt: 20, preCnt: 0 };
-  componentWillMount() {
+  state = {
+    dataList: null,
+    categorie: "cats",
+    cnt: 20,
+    preCnt: 0
+  };
+  componentDidMount() {
     this.getAnimalList();
   }
 
   getAnimalList = async () => {
-    const { dataList } = this.state;
-    const animalList = await this.callApi();
-
+    const { cnt, categorie } = this.state;
+    const animalList = await this.callApi(categorie);
+    console.log(animalList);
     this.setState({
-      dataList: dataList ? dataList.concat(animalList) : animalList,
-      preCnt: this.state.cnt,
-      cnt: this.state.cnt + 20
+      dataList: animalList
     });
   };
 
-  callApi = () => {
-    const { categorie, cnt, preCnt } = this.state;
-
+  callApi = categorie => {
+    const { cnt, preCnt } = this.state;
     return fetch(`/api/${categorie}`)
       .then(res => res.json())
       .then(json => json.slice(preCnt, cnt))
       .catch(err => console.log(err));
   };
 
-  moreLoadList = () => {
+  moreLoadList = async () => {
+    const { dataList, categorie, preCnt, cnt } = this.state;
+    const nextDateList = await fetch(`/api/${categorie}`)
+      .then(res => res.json())
+      .then(json => json.slice(preCnt + 20, cnt + 20))
+      .catch(err => console.log(err));
+
+    this.setState({
+      dataList: dataList.concat(nextDateList),
+      preCnt: cnt,
+      cnt: cnt + 20
+    });
+  };
+
+  handleChangeCategorie = e => {
+    e.preventDefault();
+    this.setState({
+      cnt: 20,
+      preCnt: 0,
+      dataList: null,
+      categorie: e.target.value
+    });
     this.getAnimalList();
   };
 
@@ -41,6 +64,7 @@ class App extends Component {
             dataList={dataList}
             categorie={categorie}
             moreLoadList={this.moreLoadList}
+            handleChangeCategorie={this.handleChangeCategorie}
           />
         ) : (
           <h1>Loading.. please wait!</h1>

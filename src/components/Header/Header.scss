@@ -1,0 +1,21 @@
+.Header-container {
+  padding: 1rem;
+  width: 100%;
+  position: fixed;
+  background-color: #333;
+  .Header-btn {
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    width: 33%;
+    cursor: pointer;
+
+    &.active {
+      border-bottom: 2px solid #fff;
+    }
+    &:hover {
+      opacity: 60%;
+    }
+  }
+}

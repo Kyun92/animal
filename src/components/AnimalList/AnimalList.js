@@ -13,7 +13,7 @@ const AnimalList = ({ dataList }) => {
       />
     );
   });
-  return <div>{animalCards}</div>;
+  return <div style={{ paddingTop: "80px" }}>{animalCards}</div>;
 };
 
 export default AnimalList;

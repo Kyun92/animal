@@ -1,9 +1,23 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from "react";
-
-const Header = () => {
+import "./Header.scss";
+const Header = ({ categorie, onClick }) => {
   return (
-    <div>
-      <h1>Cat</h1>
+    <div className="Header-container">
+      <button
+        className={`Header-btn ${categorie === "dogs" && "active"}`}
+        value="dogs"
+        onClick={e => onClick(e)}
+      >
+        🐕
+      </button>
+      <button
+        className={`Header-btn ${categorie === "cats" && "active"}`}
+        value="cats"
+        onClick={e => onClick(e)}
+      >
+        🐈
+      </button>
     </div>
   );
 };
