@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Template from "./components/Template";
 
 class App extends Component {
+  state = { dataList: null, categorie: "cats" };
+  componentWillMount() {
+    this.getAnimalList();
+  }
+
+  getAnimalList = async () => {
+    const animalList = await this.callApi();
+    this.setState({
+      dataList: animalList
+    });
+  };
+
+  callApi = () => {
+    const { categorie } = this.state;
+
+    return fetch(`/api/${categorie}`)
+      .then(res => res.json())
+      .then(json => json)
+      .catch(err => console.log(err));
+  };
+
   render() {
+    const { dataList, categorie } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {dataList ? (
+          <Template dataList={dataList} categorie={categorie} />
+        ) : (
+          <h1>Loading.. please wait!</h1>
+        )}
       </div>
     );
   }
