@@ -14,9 +14,8 @@ class App extends Component {
   }
 
   getAnimalList = async () => {
-    const { cnt, categorie } = this.state;
+    const { categorie } = this.state;
     const animalList = await this.callApi(categorie);
-    console.log(animalList);
     this.setState({
       dataList: animalList
     });

@@ -1,18 +1,17 @@
 import React from "react";
-
+import "./AnimalCard.scss";
 const AnimalCard = ({ age, gender, imageUrl, name }) => {
   return (
-    <div
-      style={{
-        display: "inline-block",
-        border: "1px solid black",
-        margin: "3px"
-      }}
-    >
+    <div className="Card">
       <img src={imageUrl} alt="alt" title={name} />
-      <p>age : {age}</p>
-      <p>gender : {gender}</p>
-      <p>name : {name}</p>
+      <div>
+        <h3>
+          <b>{name}</b>
+        </h3>
+        <p>
+          {age} / <b className={gender}> {gender === "male" ? "♂" : "♀"} </b>
+        </p>
+      </div>
     </div>
   );
 };
