@@ -1,12 +1,12 @@
 # Scatterlab
 
+![animal](/img/sca.gif)
+
 ## Run
 
 ### Server
 
-`server`
-or
-`cd server&&node server.js`
+`node server/server.js`
 
 ### Client
 
