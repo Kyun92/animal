@@ -1,6 +1,6 @@
 # Scatterlab
 
-![animal](/img/sca.gif)
+![animal](/img/scatterlab.gif)
 
 ## Run
 
