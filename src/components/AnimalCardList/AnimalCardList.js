@@ -1,7 +1,7 @@
 import React from "react";
 import AnimalCard from "../AnimalCard";
-
-const AnimalList = ({ dataList }) => {
+import "./AnimalCardList.scss";
+const AnimalCardList = ({ dataList }) => {
   const animalCards = dataList.map(animal => {
     return (
       <AnimalCard
@@ -13,7 +13,7 @@ const AnimalList = ({ dataList }) => {
       />
     );
   });
-  return <div style={{ paddingTop: "80px" }}>{animalCards}</div>;
+  return <div className="AnimalCardList">{animalCards}</div>;
 };
 
-export default AnimalList;
+export default AnimalCardList;

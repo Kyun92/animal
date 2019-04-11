@@ -1,5 +1,5 @@
 import React from "react";
-import AnimalList from "./AnimalList";
+import AnimalCardList from "./AnimalCardList";
 import Header from "./Header";
 
 const Template = ({
@@ -11,7 +11,7 @@ const Template = ({
   return (
     <div>
       <Header categorie={categorie} onClick={handleChangeCategorie} />
-      <AnimalList dataList={dataList} />
+      <AnimalCardList dataList={dataList} />
       <button
         style={{ fontSize: "20px", margin: "30px" }}
         onClick={moreLoadList}
