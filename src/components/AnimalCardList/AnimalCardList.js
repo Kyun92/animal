@@ -2,6 +2,10 @@ import React from "react";
 import AnimalCard from "../AnimalCard";
 import "./AnimalCardList.scss";
 const AnimalCardList = ({ dataList }) => {
+  AnimalCardList.defaultProps = {
+    dataList: []
+  };
+
   const animalCards = dataList.map(animal => {
     return (
       <AnimalCard

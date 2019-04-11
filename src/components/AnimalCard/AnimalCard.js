@@ -1,6 +1,13 @@
 import React from "react";
 import "./AnimalCard.scss";
 const AnimalCard = ({ age, gender, imageUrl, name }) => {
+  AnimalCard.defaultProps = {
+    age: "",
+    gender: "",
+    imageUrl: "",
+    name: ""
+  };
+
   return (
     <div className="Card">
       <img className="Card--img" src={imageUrl} alt="alt" title={name} />

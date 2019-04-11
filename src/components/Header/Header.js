@@ -2,6 +2,11 @@
 import React from "react";
 import "./Header.scss";
 const Header = ({ categorie, onClick }) => {
+  Header.defaultProps = {
+    categorie: "cats",
+    onClick: () => console.warn("onClick is not defined")
+  };
+
   return (
     <div className="Header-container">
       <button

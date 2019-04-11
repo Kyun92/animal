@@ -8,6 +8,15 @@ const Template = ({
   moreLoadList,
   handleChangeCategorie
 }) => {
+  Template.defaultProps = {
+    categorie: "cats",
+    dataList: [],
+    moreLoadList: () =>
+      console.WaveShaperNode("moreLoadList function is not defined"),
+    handleChangeCategorie: () =>
+      console.warn("handleChangeCategorie is not defined")
+  };
+
   return (
     <div>
       <Header categorie={categorie} onClick={handleChangeCategorie} />
