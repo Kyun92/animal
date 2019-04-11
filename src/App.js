@@ -9,43 +9,36 @@ class App extends Component {
     cnt: 20,
     preCnt: 0
   };
+
   componentDidMount() {
     this.getAnimalList();
   }
 
   getAnimalList = async () => {
-    const { categorie } = this.state;
-    const animalList = await this.callApi(categorie);
+    const { dataList, cnt } = this.state;
+    const animalList = await this.callApi();
     this.setState({
-      dataList: animalList
+      dataList: dataList ? dataList.concat(animalList) : animalList,
+      preCnt: cnt,
+      cnt: cnt + 20
     });
   };
 
-  callApi = categorie => {
-    const { cnt, preCnt } = this.state;
+  callApi = () => {
+    const { cnt, preCnt, categorie } = this.state;
     return fetch(`/api/${categorie}`)
       .then(res => res.json())
       .then(json => json.slice(preCnt, cnt))
       .catch(err => console.log(err));
   };
 
-  moreLoadList = async () => {
-    const { dataList, categorie, preCnt, cnt } = this.state;
-    const nextDateList = await fetch(`/api/${categorie}`)
-      .then(res => res.json())
-      .then(json => json.slice(preCnt + 20, cnt + 20))
-      .catch(err => console.log(err));
-
-    this.setState({
-      dataList: dataList.concat(nextDateList),
-      preCnt: cnt,
-      cnt: cnt + 20
-    });
+  moreLoadList = () => {
+    this.getAnimalList();
   };
 
-  handleChangeCategorie = e => {
+  handleChangeCategorie = async e => {
     e.preventDefault();
-    this.setState({
+    await this.setState({
       cnt: 20,
       preCnt: 0,
       dataList: null,
